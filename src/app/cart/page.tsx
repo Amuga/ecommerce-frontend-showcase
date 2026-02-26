@@ -30,7 +30,7 @@ export default function CartPage() {
                   alt={item.title}
                   width={60}
                   height={60}
-                  className="object-cover rounded"
+                  className="object-contain rounded"
                 />
                 <div>
                   <h2 className="font-semibold">{item.title}</h2>

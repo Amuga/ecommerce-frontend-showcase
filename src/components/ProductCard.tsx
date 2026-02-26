@@ -1,8 +1,11 @@
 // src/app/components/ProductCard.tsx
 import React from "react";
 import Image from "next/image";
-import { Product } from "@/types";
+import queryClient from "@/lib/queryClient";
+import Link from "next/link";
 import { useCartStore } from "@/store/useCartStore";
+import { fetchProductById } from "@/lib/api/products";
+import { Product } from "@/types";
 
 interface ProductCardProps {
   product: Product;
@@ -10,22 +13,36 @@ interface ProductCardProps {
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const shouldTruncate = product.title.length > 50;
+  const preFetchProduct = () => {
+    queryClient.prefetchQuery({
+      queryKey: ["product", product.id],
+      queryFn: () => fetchProductById(product.id),
+    });
+  };
   const [expanded, setExpanded] = React.useState(false);
   const { addToCart } = useCartStore();
   return (
     <div className="flex flex-col h-full rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
       <div className="relative aspect-square w-full overflow-hidden rounded-md bg-gray-100">
-        {product.image ? (
-          <Image
-            src={product.image || "/placeholder-fruit.jpg"}
-            alt={product.title}
-            fill
-            sizes="(max-width: 768px) 100vw, 33vw"
-            className="object-cover"
-          />
-        ) : (
-          <div className="absolute inset-0 animate-pulse bg-gray-200" />
-        )}
+        <Link
+          href={`/products/${product.id}`}
+          className="block w-full h-full relative"
+        >
+          {product.image ? (
+            <Image
+              src={product.image || "/placeholder-fruit.jpg"}
+              alt={product.title}
+              fill
+              loading="eager"
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-contain"
+              onClick={preFetchProduct}
+              onFocus={preFetchProduct}
+            />
+          ) : (
+            <div className="absolute inset-0 animate-pulse bg-gray-200" />
+          )}
+        </Link>
       </div>
       <div className="mt-4 flex flex-1 flex-col">
         <h2
