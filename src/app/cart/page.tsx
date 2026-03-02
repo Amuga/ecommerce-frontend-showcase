@@ -1,22 +1,26 @@
 "use client";
 import { useCartStore } from "@/store/useCartStore";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function CartPage() {
-  const { cart, removeFromCart, updateQuantity } = useCartStore();
+  const { cart, total, removeFromCart, updateQuantity } = useCartStore();
+  const router = useRouter();
 
-  const handleUpdateQuantity = (id: number, quantity: number) => {
-    if (quantity < 1) {
-      removeFromCart(id);
-    } else {
-      updateQuantity(id, quantity);
-    }
-  };
   return (
-    <div className="container mx-auto p-4">
+    <div className="container max-w-3xl mx-auto p-4">
       <h1 className="text-2xl font-bold mb-6">Your Cart</h1>
       {cart.length === 0 ? (
-        <p>Your cart is empty.</p>
+        <div className="space-y-4">
+          <p>Your cart is empty.</p>
+
+          <button
+            onClick={() => router.push("/")}
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          >
+            Back to Home
+          </button>
+        </div>
       ) : (
         <div className="space-y-4">
           {cart.map((item) => (
@@ -39,18 +43,14 @@ export default function CartPage() {
               </div>
               <div className="flex items-center space-x-4">
                 <button
-                  onClick={() =>
-                    handleUpdateQuantity(item.id, item.quantity - 1)
-                  }
+                  onClick={() => updateQuantity(item.id, item.quantity - 1)}
                   className="px-2 py-1 border rounded cursor-pointer"
                 >
                   -
                 </button>
                 <span>{item.quantity}</span>
                 <button
-                  onClick={() =>
-                    handleUpdateQuantity(item.id, item.quantity + 1)
-                  }
+                  onClick={() => updateQuantity(item.id, item.quantity + 1)}
                   className="px-2 py-1 border rounded cursor-pointer"
                 >
                   +
@@ -65,19 +65,14 @@ export default function CartPage() {
             </div>
           ))}
           <div className="mt-6 text-right">
-            <p className="text-xl font-bold">
-              Total: $
-              {cart
-                .reduce((sum, item) => sum + item.price * item.quantity, 0)
-                .toFixed(2)}
-            </p>
+            <p className="text-xl font-bold">Total: ${total}</p>
           </div>
           <div className="w-full">
             <button
-              onClick={() => console.log("TODO: Implement checkout...")}
+              onClick={() => router.push("/checkout")}
               className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 w-full"
             >
-              Checkout
+              Proceed to Checkout
             </button>
           </div>
         </div>
