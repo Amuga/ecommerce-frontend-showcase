@@ -5,10 +5,11 @@ import { submitOrder } from "@/lib/api/order";
 import { useCartStore } from "@/store/useCartStore";
 import { useOrderStore } from "@/store/useOrderStore";
 import { useRouter } from "next/navigation";
+import { CartItem } from "@/types";
 
 export default function CheckoutPage() {
   const { cart, total, clearCart } = useCartStore();
-  const { setOrderDetails } = useOrderStore();
+  const { setOrder, setOrderDetails } = useOrderStore();
   const router = useRouter();
 
   const {
@@ -27,7 +28,8 @@ export default function CheckoutPage() {
         })),
       }),
     onSuccess: (order) => {
-      setOrderDetails(order);
+      setOrder(order);
+      setOrderDetails([...cart]);
       clearCart();
       router.push("/order-confirmation/" + order.id);
     },
