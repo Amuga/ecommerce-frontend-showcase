@@ -3,11 +3,13 @@ import { useParams } from "next/navigation";
 import { useProduct } from "@/hooks/useProduct";
 import Image from "next/image";
 import { useCartStore } from "@/store/useCartStore";
+import { useRouter } from "next/navigation";
 
 export default function ProductDetailPage() {
   const params = useParams<{ id: string }>();
   const { data: product, isLoading, error } = useProduct(Number(params.id));
   const { addToCart } = useCartStore();
+  const router = useRouter();
 
   if (isLoading) {
     return <div>Loading product...</div>;
@@ -33,7 +35,7 @@ export default function ProductDetailPage() {
         </div>
         <div className="space-y-4">
           <h1 className="text-3xl font-bold">{product.title}</h1>
-          <p className="text-2xl text-gray-900">${product.price}</p>
+          <p className="text-2xl text-gray-700">${product.price}</p>
           <p className="text-gray-600">{product.description}</p>
           <div className="flex items-center">
             <p className="text-yellow-500">★ {product.rating.rate}</p>
@@ -42,10 +44,16 @@ export default function ProductDetailPage() {
             </span>
           </div>
           <button
-            className="w-full rounded-md bg-green-600 px-4 py-2 text-white hover:bg-green-700"
+            className="rounded-md bg-green-600 px-4 py-2 text-white hover:bg-green-700 block md:w-auto w-full"
             onClick={() => addToCart(product)}
           >
             Add to Cart
+          </button>
+          <button
+            onClick={() => router.push("/")}
+            className="rounded-md bg-blue-500 px-4 py-2 space-between text-white hover:bg-blue-600 block md:w-auto w-full"
+          >
+            Back to Home
           </button>
         </div>
       </div>

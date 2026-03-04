@@ -1,6 +1,7 @@
 "use client";
 import { useCartStore } from "@/store/useCartStore";
 import Link from "next/link";
+import { SearchBar } from "./SearchBar";
 
 export const Navbar = () => {
   const { cart } = useCartStore();
@@ -10,6 +11,7 @@ export const Navbar = () => {
         <Link href="/" className="text-xl font-bold text-gray-600">
           Liftshops
         </Link>
+        <SearchBar />
         <Link href="/cart" className="relative">
           🛒
           {cart.length > 0 && (

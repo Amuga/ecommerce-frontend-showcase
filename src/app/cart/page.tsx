@@ -8,7 +8,7 @@ export default function CartPage() {
   const router = useRouter();
 
   return (
-    <div className="container max-w-3xl mx-auto p-4">
+    <div className="container mx-auto max-w-3xl p-4">
       <h1 className="text-2xl font-bold mb-6">Your Cart</h1>
       {cart.length === 0 ? (
         <div className="space-y-4">
@@ -16,7 +16,7 @@ export default function CartPage() {
 
           <button
             onClick={() => router.push("/")}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 md:w-auto w-full"
           >
             Back to Home
           </button>

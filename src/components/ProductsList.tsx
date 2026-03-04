@@ -5,7 +5,6 @@ import { ProductCard } from "./ProductCard";
 
 export default function ProductsList() {
   const { data: products, isLoading, error } = useProducts();
-
   if (isLoading) {
     return <div>Loading products...</div>;
   }

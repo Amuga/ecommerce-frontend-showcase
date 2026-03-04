@@ -15,7 +15,7 @@ export default async function Home() {
       <h2 className="text-lg text-gray-600 mt-2">
         Lifting your shopping experience to criminal heights
       </h2>
-      <div className="container mx-auto mt-6">
+      <div className="mt-6">
         <HydrationBoundary state={dehydrate(queryClient)}>
           <ProductsList />
         </HydrationBoundary>
