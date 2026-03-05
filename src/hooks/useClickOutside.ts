@@ -15,4 +15,15 @@ export const useClickOutside = (
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [ref, callback]);
+  useEffect(() => {
+    const handleBlur = (event: FocusEvent) => {
+      if (ref.current && !ref.current.contains(event.relatedTarget as Node)) {
+        callback();
+      }
+    };
+    ref.current?.addEventListener("blur", handleBlur, true);
+    return () => {
+      ref.current?.removeEventListener("blur", handleBlur, true);
+    };
+  }, [ref, callback]);
 };

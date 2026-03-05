@@ -89,7 +89,7 @@ export const SearchBar = () => {
         aria-label="Search products"
         aria-autocomplete="list"
         aria-controls="search-results"
-        className="w-full  p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full  p-2 border rounded-lg"
         value={searchQuery}
         onChange={(e) => {
           setSearchQuery(e.target.value);
