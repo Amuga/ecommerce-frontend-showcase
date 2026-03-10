@@ -49,7 +49,7 @@ export default function OrderConfirmationPage() {
         </div>
       </div>
 
-      <div className="flex justify-center space-x-4">
+      <div className="flex justify-center gap-4">
         <button onClick={handleClick} className="btn-primary">
           Go back
         </button>

@@ -122,7 +122,7 @@ export const SearchBar = () => {
                   setShowDropdown(false);
                 }}
               >
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center gap-2">
                   <Image
                     src={product.image}
                     alt={product.title}

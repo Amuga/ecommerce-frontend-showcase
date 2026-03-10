@@ -11,21 +11,20 @@ export default function CartPage() {
     <div className="container mx-auto max-w-3xl p-4">
       <h1 className="text-2xl font-bold mb-6">Your Cart</h1>
       {cart.length === 0 ? (
-        <div className="space-y-4">
-          <p>Your cart is empty.</p>
-
-          <button onClick={() => router.back()} className="btn-secondary">
-            Back to Home
+        <div className="flex flex-col items-center gap-4 p-6 border rounded-lg bg-gray-50 shadow-sm">
+          <p className="text-gray-600">Your cart is empty.</p>
+          <button onClick={() => router.push("/")} className="btn-secondary">
+            Go back
           </button>
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="flex flex-col gap-4">
           {cart.map((item) => (
             <div
               key={item.id}
-              className="flex items-center justify-between p-4 border rounded-lg"
+              className="flex items-center justify-between p-4 border rounded-lg bg-gray-50 shadow-sm"
             >
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center gap-4">
                 <Image
                   src={item.image}
                   alt={item.title}
@@ -38,33 +37,35 @@ export default function CartPage() {
                   <p className="text-gray-600">${item.price}</p>
                 </div>
               </div>
-              <div className="flex items-center space-x-4">
-                <button
-                  onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                  className="px-2 py-1 border rounded cursor-pointer"
-                >
-                  -
-                </button>
-                <span>{item.quantity}</span>
-                <button
-                  onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                  className="px-2 py-1 border rounded cursor-pointer"
-                >
-                  +
-                </button>
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                    className="px-3 py-1 border rounded hover:bg-gray-100"
+                  >
+                    -
+                  </button>
+                  <span className="px-2">{item.quantity}</span>
+                  <button
+                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                    className="px-3 py-1 border rounded hover:bg-gray-100"
+                  >
+                    +
+                  </button>
+                </div>
                 <button
                   onClick={() => removeFromCart(item.id)}
-                  className=" cursor-pointer btn-danger"
+                  className="btn-danger"
                 >
                   Remove
                 </button>
               </div>
             </div>
           ))}
-          <div className="mt-6 text-right">
+          <div className="border-t pt-4 text-center">
             <p className="text-xl font-bold">Total: ${total}</p>
           </div>
-          <div className="w-full flex flex-col md:flex-row items-center justify-end gap-4">
+          <div className="flex flex-col md:flex-row items-center justify-end gap-4">
             <button onClick={() => router.back()} className="btn-secondary">
               Go back
             </button>
