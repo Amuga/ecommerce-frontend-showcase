@@ -33,7 +33,7 @@ export default function ProductDetailPage() {
             fill
           />
         </div>
-        <div className="space-y-4">
+        <div className="gap-4 flex flex-col">
           <h1 className="text-3xl font-bold">{product.title}</h1>
           <p className="text-2xl text-gray-700">${product.price}</p>
           <p className="text-gray-600">{product.description}</p>
@@ -43,17 +43,11 @@ export default function ProductDetailPage() {
               ({product.rating.count} reviews)
             </span>
           </div>
-          <button
-            className="rounded-md bg-green-600 px-4 py-2 text-white hover:bg-green-700 block md:w-auto w-full"
-            onClick={() => addToCart(product)}
-          >
+          <button className="btn-primary " onClick={() => addToCart(product)}>
             Add to Cart
           </button>
-          <button
-            onClick={() => router.push("/")}
-            className="rounded-md bg-blue-500 px-4 py-2 space-between text-white hover:bg-blue-600 block md:w-auto w-full"
-          >
-            Back to Home
+          <button onClick={() => router.back()} className="btn-secondary mb-4">
+            Go back
           </button>
         </div>
       </div>

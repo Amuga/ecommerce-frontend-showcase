@@ -66,10 +66,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         )}
         <div className="mt-auto pt-4">
           <button
-            className="w-full rounded-md bg-green-600 px-4 py-2 text-white hover:bg-green-700"
+            className="btn-primary w-full"
             onClick={() => addToCart(product)}
           >
-            Add to cart
+            Add to Cart
           </button>
         </div>
       </div>

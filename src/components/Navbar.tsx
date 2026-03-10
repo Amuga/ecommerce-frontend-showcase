@@ -23,7 +23,8 @@ export const Navbar = () => {
           🛒
           {cart.length > 0 && (
             <span
-              className={`absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center ${cart.length > 0 ? "animate-pulse" : ""}`}
+              className={`absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex
+                 items-center justify-center ${cart.length > 0 ? "animate-pulse" : ""}`}
               aria-label={`Cart with ${cart.length} items in cart`}
             >
               {cart.length}

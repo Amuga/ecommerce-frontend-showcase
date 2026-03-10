@@ -14,10 +14,7 @@ export default function CartPage() {
         <div className="space-y-4">
           <p>Your cart is empty.</p>
 
-          <button
-            onClick={() => router.push("/")}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 md:w-auto w-full"
-          >
+          <button onClick={() => router.back()} className="btn-secondary">
             Back to Home
           </button>
         </div>
@@ -57,7 +54,7 @@ export default function CartPage() {
                 </button>
                 <button
                   onClick={() => removeFromCart(item.id)}
-                  className="text-red-500 cursor-pointer border border-red-500 px-2 py-1 rounded"
+                  className=" cursor-pointer btn-danger"
                 >
                   Remove
                 </button>
@@ -67,10 +64,13 @@ export default function CartPage() {
           <div className="mt-6 text-right">
             <p className="text-xl font-bold">Total: ${total}</p>
           </div>
-          <div className="w-full">
+          <div className="w-full flex flex-col md:flex-row items-center justify-end gap-4">
+            <button onClick={() => router.back()} className="btn-secondary">
+              Go back
+            </button>
             <button
               onClick={() => router.push("/checkout")}
-              className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 w-full"
+              className="btn-primary"
             >
               Proceed to Checkout
             </button>
