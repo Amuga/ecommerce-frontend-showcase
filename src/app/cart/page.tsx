@@ -1,6 +1,7 @@
 "use client";
 import { useCartStore } from "@/store/useCartStore";
 import Image from "next/image";
+import { CartItemsList } from "@/components/CartItemsList";
 import { useRouter } from "next/navigation";
 
 export default function CartPage() {
@@ -19,49 +20,11 @@ export default function CartPage() {
         </div>
       ) : (
         <div className="flex flex-col gap-4">
-          {cart.map((item) => (
-            <div
-              key={item.id}
-              className="flex items-center justify-between p-4 border rounded-lg bg-gray-50 shadow-sm"
-            >
-              <div className="flex items-center gap-4">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  width={60}
-                  height={60}
-                  className="object-contain rounded"
-                />
-                <div>
-                  <h2 className="font-semibold">{item.title}</h2>
-                  <p className="text-gray-600">${item.price}</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                    className="px-3 py-1 border rounded hover:bg-gray-100"
-                  >
-                    -
-                  </button>
-                  <span className="px-2">{item.quantity}</span>
-                  <button
-                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                    className="px-3 py-1 border rounded hover:bg-gray-100"
-                  >
-                    +
-                  </button>
-                </div>
-                <button
-                  onClick={() => removeFromCart(item.id)}
-                  className="btn-danger"
-                >
-                  Remove
-                </button>
-              </div>
-            </div>
-          ))}
+          <CartItemsList
+            items={cart}
+            onQuantityChange={updateQuantity}
+            onRemove={removeFromCart}
+          />
           <div className="border-t pt-4 text-center">
             <p className="text-xl font-bold">Total: ${total}</p>
           </div>

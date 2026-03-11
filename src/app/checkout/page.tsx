@@ -4,10 +4,11 @@ import { useMutation } from "@tanstack/react-query";
 import { submitOrder } from "@/lib/api/order";
 import { useCartStore } from "@/store/useCartStore";
 import { useOrderStore } from "@/store/useOrderStore";
+import { CartItemsList } from "@/components/CartItemsList";
 import { useRouter } from "next/navigation";
 
 export default function CheckoutPage() {
-  const { cart, total, clearCart } = useCartStore();
+  const { cart, total } = useCartStore();
   const { setOrder, setOrderDetails } = useOrderStore();
   const router = useRouter();
 
@@ -29,7 +30,6 @@ export default function CheckoutPage() {
     onSuccess: (order) => {
       setOrder(order);
       setOrderDetails([...cart]);
-      clearCart();
       router.push("/order-confirmation/" + order.id);
     },
     onError: (err) => {
@@ -46,20 +46,14 @@ export default function CheckoutPage() {
     <div className="p-4 max-w-3xl mx-auto">
       <div className="border rounded-lg p-4 mb-6 bg-gray-50 shadow-sm">
         <h1 className="text-2xl font-bold mb-4">Order Details</h1>
-        <ul className="space-y-2">
-          {cart.map((item) => (
-            <li key={item.id} className="flex justify-between">
-              <span>
-                {item.title} (x{item.quantity})
-              </span>
-              <span>${(item.price * item.quantity).toFixed(2)}</span>
-            </li>
-          ))}
-        </ul>
+        <CartItemsList items={cart} mode="readonly-checkout" />
       </div>
 
       <div className="border rounded-lg p-4 mb-6 bg-gray-50 shadow-sm">
-        <h1 className="text-2xl font-bold mb-4">Payment Information (Mock)</h1>
+        <h1 className="text-2xl font-bold mb-4">Payment Information </h1>
+        <h2 className="text-lg text-gray-600 mb-6">
+          (This is a mock checkout form. No real payment processing occurs.)
+        </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="md:col-span-2">
@@ -109,12 +103,10 @@ export default function CheckoutPage() {
             </div>
           </div>
 
-          {/* Total Centered */}
           <div className="text-center mt-6">
             <h1 className="text-xl font-bold">Total: ${total.toFixed(2)}</h1>
           </div>
 
-          {/* Buttons */}
           <div className="w-full flex flex-col md:flex-row items-center justify-end gap-4 mt-6">
             <button
               type="button"
