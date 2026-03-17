@@ -3,7 +3,11 @@ import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import queryClient from "@/lib/queryClient";
 import ProductsList from "@/components/ProductsList";
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: { category?: string };
+}) {
   await queryClient.prefetchQuery({
     queryKey: ["products"],
     queryFn: fetchProducts,
