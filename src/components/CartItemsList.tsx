@@ -33,6 +33,9 @@ export function CartItemsList({
           key={item.id}
           id={item.id}
           image={item.image}
+          category=""
+          description=""
+          rating={{}}
           title={item.title}
           price={item.price}
           quantity={item.quantity}

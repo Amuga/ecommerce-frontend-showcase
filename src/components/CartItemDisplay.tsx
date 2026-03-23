@@ -26,33 +26,31 @@ export function CartItemDisplay({
   // Interactive mode - full display
   if (isInteractive) {
     return (
-      <div className="flex items-center justify-between p-4 border rounded-lg bg-gray-50 shadow-sm">
-        <div className="flex items-center gap-4">
-          <Image
-            src={image}
-            alt={title}
-            width={60}
-            height={60}
-            className="object-contain rounded"
-          />
-          <div>
-            <h2 className="font-semibold">{title}</h2>
-            <p className="text-gray-600">${price.toFixed(2)}</p>
-          </div>
+      <div className="flex items-center gap-3 p-3 border rounded bg-gray-50 shadow-sm">
+        <Image
+          src={image}
+          alt={title}
+          width={64}
+          height={64}
+          className="object-contain w-16 h-16 rounded"
+        />
+        <div className="flex-1 ">
+          <h2 className="font-semibold text-sm line-clamp-3">{title}</h2>
+          <p className="text-gray-600 text-xs">${price.toFixed(2)}</p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex  gap-2">
           <div className="flex items-center gap-2">
             <button
               onClick={() => onQuantityChange?.(id, quantity - 1)}
-              className="px-3 py-1 border rounded hover:bg-gray-100"
+              className="px-2 py-1 text-xs border rounded hover:bg-gray-100"
               aria-label="Decrease quantity"
             >
               -
             </button>
-            <span className="px-2 w-8 text-center">{quantity}</span>
+            <span className="text-xs min-w-5 text-center">{quantity}</span>
             <button
               onClick={() => onQuantityChange?.(id, quantity + 1)}
-              className="px-3 py-1 border rounded hover:bg-gray-100"
+              className="px-2 py-1 text-xs border rounded hover:bg-gray-100"
               aria-label="Increase quantity"
             >
               +
@@ -60,7 +58,7 @@ export function CartItemDisplay({
           </div>
           <button
             onClick={() => onRemove?.(id)}
-            className="btn-danger"
+            className="btn-danger px-2 py-1 text-xs"
             aria-label="Remove item"
           >
             Remove

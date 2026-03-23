@@ -6,7 +6,6 @@ import { useSearchParams } from "next/navigation";
 export const Categories = () => {
   const { data: products = [], isLoading } = useProducts();
   const searchParams = useSearchParams();
-  const category = searchParams.get("category");
 
   // Extract and sort categories
   const categories = products
@@ -25,7 +24,7 @@ export const Categories = () => {
         <Link
           key={category}
           href={`/?category=${encodeURIComponent(category)}`}
-          className={`capitalize transition-colors ${category === searchParams.get("category") ? "text-blue-600 font-medium" : "text-gray-600 hover:text-gray-900"}`}
+          className={`capitalize transition-colors ${category === searchParams.get("category") ? "text-blue-600 font-medium pointer-events-none" : "text-gray-600 hover:text-gray-900"}`}
         >
           {category}
         </Link>

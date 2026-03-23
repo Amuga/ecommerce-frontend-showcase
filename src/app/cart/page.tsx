@@ -1,6 +1,5 @@
 "use client";
 import { useCartStore } from "@/store/useCartStore";
-import Image from "next/image";
 import { CartItemsList } from "@/components/CartItemsList";
 import { useRouter } from "next/navigation";
 
@@ -26,7 +25,7 @@ export default function CartPage() {
             onRemove={removeFromCart}
           />
           <div className="border-t pt-4 text-center">
-            <p className="text-xl font-bold">Total: ${total}</p>
+            <p className="text-xl font-bold">Total: ${total.toFixed(2)}</p>
           </div>
           <div className="flex flex-col md:flex-row items-center justify-end gap-4">
             <button onClick={() => router.back()} className="btn-secondary">

@@ -3,6 +3,7 @@ import { useCartStore } from "@/store/useCartStore";
 import Link from "next/link";
 import { SearchBar } from "./SearchBar";
 import { Categories } from "./Categories";
+import { SidebarCart } from "@/components/navbar/SidebarCart";
 
 export const Navbar = () => {
   const { cart } = useCartStore();
@@ -18,22 +19,7 @@ export const Navbar = () => {
             Liftshops
           </Link>
           <SearchBar />
-          <Link
-            href="/cart"
-            className="relative p-2 rounded-md hover:bg-gray-100 transition-colors"
-          >
-            🛒
-            {cart.length > 0 && (
-              <span
-                className={
-                  "absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center animate-pulse"
-                }
-                aria-label={`Cart with ${cart.length} items in cart`}
-              >
-                {cart.length}
-              </span>
-            )}
-          </Link>
+          <SidebarCart />
         </div>
 
         <div className="flex justify-center">
